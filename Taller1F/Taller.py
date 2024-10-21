@@ -118,7 +118,7 @@ def ecuacion_cuadratica(a, b, c):
     else:
         return "No hay soluciones reales."
 
-# Función para resolver la ecuación cuadrática - Botón Funciones
+# Función para resolver la ecuación cuadrática - Funciones
 def formula_cuadratica(a, b, c):
     if a == 0:
         return "El valor de 'a' no puede ser 0."
@@ -233,21 +233,23 @@ def generar_histograma():
     data = [5, 7, 8, 5, 7, 5, 10, 9, 6, 5]  # Datos de ejemplo
     histograma(data)
 
+# Reemplaza todas las ocurrencias de una subcadena por otra.
 def ejemplo_replace():
     frase = "Analítica de Datos"
     resultado = frase.replace("Datos", "Información")
     messagebox.showinfo("Replace", f"Original: {frase}\nReplace: {resultado}")
 
+#Devuelve el índice de la primera ocurrencia de una subcadena. Si no se encuentra, devuelve -1
 def ejemplo_find():
     frase = "Analítica de Datos"
     posicion = frase.find("Datos")
     messagebox.showinfo("Find", f"Original: {frase}\nPosición de 'Datos': {posicion}")
-
+#Devuelve el número de ocurrencias de una subcadena dentro de una cadena.
 def ejemplo_count():
     frase = "Gestión de Datos"
     contador = frase.count("Datos")
     messagebox.showinfo("Count", f"Original: {frase}\nCantidad de 'Datos': {contador}")
-
+#Retorna una copia de la cadena con la primera letra en mayúscula y el resto en minúscula.
 def ejemplo_capitalize():
     frase = "gestión de datos"
     capitalizado = frase.capitalize()
@@ -257,22 +259,22 @@ def ejemplo_title():
     frase = "gestión de datos"
     titulo = frase.title()
     messagebox.showinfo("Title", f"Original: {frase}\nTitle Case: {titulo}")
-
+#Elimina los espacios en blanco al final de una cadena.
 def ejemplo_rstrip():
     frase = "Gestión de Datos   "
     resultado = frase.rstrip()
     messagebox.showinfo("Rstrip", f"Original con espacios: '{frase}'\nRstrip: '{resultado}'")
-
+#Devuelve la posición de la primera ocurrencia de una subcadena dentro de una cadena.
 def ejemplo_index():
     frase = "Analítica de Datos"
     indice = frase.index("Datos")
     messagebox.showinfo("Index", f"Original: {frase}\nÍndice de 'Datos': {indice}")
-
+#Retorna una versión en minúsculas de la cadena.
 def ejemplo_casefold():
     frase = "GESTIÓN DE DATOS"
     resultado = frase.casefold()
     messagebox.showinfo("Casefold", f"Original: {frase}\nCasefold (minúsculas): {resultado}")
-
+#Función para dividir la cadena en palabras y devolver una lista de palabras.
 def ejemplo_manipulacion_cadenas():
     frase = "Gestión de Datos"
     palabras = frase.split()
@@ -474,26 +476,128 @@ def mostrar_menu_cadenas():
 
     tk.Button(ventana_cadenas, text="Ejecutar", command=ejecutar_funcion_cadenas).pack()
 
-# Crear la ventana principal
+# Función para agrupar palabras que comienzan con la misma letra
+def agrupar_por_inicial():
+    words = ['apple', 'bat', 'bar', 'atom', 'book', 'cat']
+    diccionario = {}
+    for palabra in words:
+        letra_inicial = palabra[0].lower()
+        if letra_inicial not in diccionario:
+            diccionario[letra_inicial] = []
+        diccionario[letra_inicial].append(palabra)
+    resultado = "\n".join([f"{letra}: {', '.join(diccionario[letra])}" for letra in diccionario])
+    messagebox.showinfo("Agrupar por Inicial", resultado)
+
+# Función para contar vocales y consonantes y devolver un diccionario
+def contar_vocales_consonantes_diccionario(cadena):
+    vocales = 'aeiouAEIOU'
+    contador_vocales = {v: 0 for v in 'aeiou'}
+    contador_consonantes = 0
+    for letra in cadena:
+        if letra.lower() in vocales:
+            contador_vocales[letra.lower()] += 1
+        elif letra.isalpha():
+            contador_consonantes += 1
+    contador_vocales['Consonantes'] = contador_consonantes
+    resultado = str(contador_vocales)
+    messagebox.showinfo("Conteo de Vocales y Consonantes", resultado)
+
+# Función para convertir la información de clientes en un diccionario
+def convertir_cadena_a_diccionario():
+    cadena = """id;nombre;correo;movil;salario
+3412;Pepe Perez;pepeperez@yahoo.com;300281234;150000
+45342;Maria Melo;mariamelo@yahoo.com;315434223;300000
+5673321;Fernando Jimenez;ferjim@gmail.com;312342234;230000
+4545231;Carlos Cardenas;carloscardenas@hotmail.com;3156754323;345000"""
+    
+    lineas = cadena.split("\n")
+    encabezados = lineas[0].split(";")
+    diccionario_empleados = {}
+    
+    for linea in lineas[1:]:
+        datos = linea.split(";")
+        id_empleado = datos[0]
+        diccionario_empleados[id_empleado] = {encabezados[i]: datos[i] for i in range(1, len(encabezados))}
+    
+    resultado = str(diccionario_empleados)
+    messagebox.showinfo("Diccionario de Empleados", resultado)
+
+# Función para mostrar el menú de diccionarios
+def mostrar_menu_diccionarios():
+    ventana_diccionarios = tk.Toplevel(ventana)
+    ventana_diccionarios.title("Funciones de Diccionarios")
+
+    tk.Label(ventana_diccionarios, text="Seleccione una función:").pack()
+
+    opciones = [
+        'Agrupar palabras por inicial',
+        'Contar vocales y consonantes',
+        'Convertir cadena de clientes a diccionario'
+    ]
+
+    # Lista desplegable (combobox)
+    combo = ttk.Combobox(ventana_diccionarios, values=opciones)
+    combo.pack()
+
+    # Entrada para la cadena (inicialmente oculta)
+    tk.Label(ventana_diccionarios, text="Ingrese una cadena:", name="label_cadena").pack()
+    entrada_cadena = tk.Entry(ventana_diccionarios, name="entrada_cadena")
+    entrada_cadena.pack()
+
+    # Ocultar la entrada de cadena por defecto
+    ventana_diccionarios.children["label_cadena"].pack_forget()
+    ventana_diccionarios.children["entrada_cadena"].pack_forget()
+
+    # Función para manejar la opción seleccionada
+    def mostrar_entrada_cadena(*args):
+        seleccion = combo.get()
+
+        if seleccion == 'Contar vocales y consonantes':
+            ventana_diccionarios.children["label_cadena"].pack()
+            ventana_diccionarios.children["entrada_cadena"].pack()
+        else:
+            ventana_diccionarios.children["label_cadena"].pack_forget()
+            ventana_diccionarios.children["entrada_cadena"].pack_forget()
+
+    # Función para ejecutar la opción seleccionada
+    def ejecutar_funcion_diccionarios():
+        seleccion = combo.get()
+        cadena = entrada_cadena.get()
+
+        if seleccion == 'Agrupar palabras por inicial':
+            agrupar_por_inicial()
+        elif seleccion == 'Contar vocales y consonantes':
+            if not cadena:
+                messagebox.showerror("Error", "Por favor ingrese una cadena.")
+            else:
+                contar_vocales_consonantes_diccionario(cadena)
+        elif seleccion == 'Convertir cadena de clientes a diccionario':
+            convertir_cadena_a_diccionario()
+
+    combo.bind("<<ComboboxSelected>>", mostrar_entrada_cadena)
+
+    tk.Button(ventana_diccionarios, text="Ejecutar", command=ejecutar_funcion_diccionarios).pack()
+
+# Ventana principal
 ventana = tk.Tk()
 ventana.title("Menú Principal")
 
-# Configurar el estilo del botón
+
 style = ttk.Style()
 style.configure("Neon.TButton",
                 borderwidth=2,
                 relief="flat",
                 padding=10,
-                background="#282c34",  # Color de fondo del botón
-                foreground="#61afef",  # Color de texto
+                background="#282c34",  
+                foreground="#61afef", 
                 font=("Helvetica", 12, "bold"))
 
 style.map("Neon.TButton",
-          background=[("active", "#61afef")],  # Color de fondo al pasar el ratón
-          foreground=[("active", "#282c34")])  # Color de texto al pasar el ratón
+          background=[("active", "#61afef")],  
+          foreground=[("active", "#282c34")])  
 
-# Crear 8 botones con distintas funcionalidades
-for i in range(8):
+# Botones 
+for i in range(7):
     if i == 0:
         ttk.Button(ventana, text=f"Botón {i + 1}: Notas", style="Neon.TButton", command=mostrar_menu_notas).pack(pady=10)
     elif i == 1:
@@ -506,12 +610,12 @@ for i in range(8):
         ttk.Button(ventana, text=f"Botón {i + 1}: Listas", style="Neon.TButton", command=mostrar_menu_listas).pack(pady=10)
     elif i == 5:
         ttk.Button(ventana, text=f"Botón {i + 1}: Conjuntos", style="Neon.TButton", command=mostrar_menu_conjuntos).pack(pady=10)
+    elif i == 6:
+        ttk.Button(ventana, text=f"Botón {i + 1}: Diccionarios", style="Neon.TButton", command=mostrar_menu_diccionarios).pack(pady=10)
     else:
         ttk.Button(ventana, text=f"Botón {i + 1}", style="Neon.TButton").pack(pady=10)
 
-# Ajustar el tamaño de la ventana
-ventana.geometry("300x400")
-ventana.configure(bg="#21252b")  # Color de fondo de la ventana
+ventana.geometry("300x500")
+ventana.configure(bg="#21252b")  
 
-# Iniciar el bucle principal de la interfaz gráfica
 ventana.mainloop()
