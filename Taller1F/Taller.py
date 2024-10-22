@@ -1,11 +1,8 @@
 #Taller Unidad1
-#William cely López     202012319
+#William Cely López     202012319
 #Nicolás Esteban Peña   202010609
 
 import json
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox, ttk
 import math
 from datetime import datetime
 
@@ -18,7 +15,7 @@ def cargar_datos():
         messagebox.showerror("Error", "El archivo JSON no se encontró.")
         return []
 
-# Función para calcular la nota promedio por asignaturas
+# Función para calcular la nota promedio por asignatura
 def calcular_promedio_por_asignatura(data):
     promedio_asignaturas = {}
     conteo_asignaturas = {}
@@ -72,6 +69,7 @@ def generar_correos(data):
 
     return correos
 
+#OPERADORES
 # Función para resolver la ecuación cuadrática 
 def ecuacion_cuadratica(a, b, c):
     discriminante = b**2 - 4*a*c
@@ -85,6 +83,7 @@ def ecuacion_cuadratica(a, b, c):
     else:
         return "No hay soluciones reales."
 
+#FUNCIONES
 # Función para resolver la ecuación cuadrática - Funciones
 def formula_cuadratica(a, b, c):
     if a == 0:
@@ -101,27 +100,6 @@ def formula_cuadratica(a, b, c):
         x2 = (-b - math.sqrt(discriminante)) / (2*a)
         return f"Las soluciones son: x1 = {x1}, x2 = {x2}"
 
-# Función para manejar el botón de Operadores
-def resolver_ecuacion_operadores(entry_a, entry_b, entry_c):
-    try:
-        a = float(entry_a.get())
-        b = float(entry_b.get())
-        c = float(entry_c.get())
-        resultado = ecuacion_cuadratica(a, b, c)
-        messagebox.showinfo("Resultado", resultado)
-    except ValueError:
-        messagebox.showerror("Error", "Por favor ingresa valores numéricos válidos.")
-
-# Función para manejar el botón de Funciones
-def resolver_ecuacion_funciones(entry_a, entry_b, entry_c):
-    try:
-        a = float(entry_a.get())
-        b = float(entry_b.get())
-        c = float(entry_c.get())
-        resultado = formula_cuadratica(a, b, c)
-        messagebox.showinfo("Resultado", resultado)
-    except ValueError:
-        messagebox.showerror("Error", "Por favor ingresa valores numéricos válidos.")
 
 # Función para determinar si un carácter es vocal o no
 def es_vocal(entry_caracter):
@@ -147,6 +125,7 @@ def generar_histograma():
     data = [5, 7, 8, 5, 7, 5, 10, 9, 6, 5]  # Datos de ejemplo
     histograma(data)
 
+#CADENAS
 # Reemplaza todas las ocurrencias de una subcadena por otra.
 def ejemplo_replace():
     frase = "Analítica de Datos"
@@ -193,7 +172,8 @@ def ejemplo_casefold():
     frase = "GESTIÓN DE DATOS"
     resultado = frase.casefold()
     messagebox.showinfo("Casefold", f"Original: {frase}\nCasefold (minúsculas): {resultado}")
-    
+
+#LISTAS
 #Función para dividir la cadena en palabras y devolver una lista de palabras.
 def ejemplo_manipulacion_cadenas():
     frase = "Gestión de Datos"
@@ -222,45 +202,56 @@ def tiene_duplicados(lista):
 def eliminar_duplicados(lista):
     return list(set(lista))
 
+#CONJUNTOS
 # Definición de las funciones para cada operación de conjuntos
-
+#Actualiza el conjunto1 con los elementos que están en conjunto2 y devuelve el resultado.
 def intersection_update(conjunto1, conjunto2):
     conjunto1.intersection_update(conjunto2)
     return f"Resultado de intersection_update: {conjunto1}"
 
+#Devuelve True si los conjuntos tienen elementos en común y devuelve False en caso contrario.
 def isdisjoint(conjunto1, conjunto2):
     return f"¿Son disjuntos?: {conjunto1.isdisjoint(conjunto2)}"
 
+#Devuelve True si conjunto1 es un subconjunto de conjunto2 y devuelve False en caso contrario.
 def issubset(conjunto1, conjunto2):
     return f"¿Es subconjunto?: {conjunto1.issubset(conjunto2)}"
 
+#Devuelve True si conjunto1 es un superconjunto de conjunto2 y devuelve False en caso contrario.
 def issuperset(conjunto1, conjunto2):
     return f"¿Es superconjunto?: {conjunto1.issuperset(conjunto2)}"
 
+#Elimina el último elemento del conjunto1 y devuelve el elemento eliminado y el conjunto restante.
 def pop_element(conjunto1):
     elemento = conjunto1.pop()
     return f"Elemento extraído con pop: {elemento}\nConjunto restante: {conjunto1}"
 
+#Realiza una actualización simétrica del conjunto1 con los elementos que están en conjunto2 y devuelve el resultado.
 def symmetric_difference_update(conjunto1, conjunto2):
     conjunto1.symmetric_difference_update(conjunto2)
     return f"Resultado de symmetric_difference_update: {conjunto1}"
 
+#Devuelve un conjunto que contiene los elementos que están en conjunto1 o conjunto2.
 def union(conjunto1, conjunto2):
     union_set = conjunto1.union(conjunto2)
     return f"Resultado de union: {union_set}"
 
+#Actualiza el conjunto1 con los elementos que están en conjunto2.
 def update(conjunto1, conjunto2):
     conjunto1.update(conjunto2)
     return f"Resultado de update: {conjunto1}"
 
+#Elimina el elemento del conjunto1.
 def remove(conjunto1, elemento):
     conjunto1.remove(elemento)
     return f"Resultado de remove ({elemento}): {conjunto1}"
 
+# Devuelve la diferencia simétrica entre dos conjuntos.
 def symmetric_difference(conjunto1, conjunto2):
     sim_diff = conjunto1.symmetric_difference(conjunto2)
     return f"Resultado de symmetric_difference: {sim_diff}"
 
+#DICCIONARIOS
 # Función para agrupar palabras que comienzan con la misma letra
 def agrupar_por_inicial():
     words = ['apple', 'bat', 'bar', 'atom', 'book', 'cat']
@@ -306,6 +297,10 @@ def convertir_cadena_a_diccionario():
     
     resultado = str(diccionario_empleados)
     messagebox.showinfo("Diccionario de Empleados", resultado)
+
+
+#---------------------------------------------------------------------------------------------------------------
+#INTERFAZ
     
 import tkinter as tk
 from tkinter import ttk
@@ -340,6 +335,18 @@ def mostrar_menu_notas():
     tk.Button(ventana_notas, text="Ejecutar", command=ejecutar_opcion_notas).pack()
 
 # Función para mostrar el menú de operadores
+# Función para manejar el botón de Operadores
+def resolver_ecuacion_operadores(entry_a, entry_b, entry_c):
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        c = float(entry_c.get())
+        resultado = ecuacion_cuadratica(a, b, c)
+        messagebox.showinfo("Resultado", resultado)
+    except ValueError:
+        messagebox.showerror("Error", "Por favor ingresa valores numéricos válidos.")
+
+
 def mostrar_menu_operadores():
     ventana_operadores = tk.Toplevel(ventana)
     ventana_operadores.title("Operadores - Ecuación Cuadrática")
@@ -359,6 +366,17 @@ def mostrar_menu_operadores():
     tk.Button(ventana_operadores, text="Resolver", command=lambda: resolver_ecuacion_operadores(entry_a, entry_b, entry_c)).pack()
 
 # Función para mostrar el menú de funciones
+# Función para manejar el botón de Funciones
+def resolver_ecuacion_funciones(entry_a, entry_b, entry_c):
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        c = float(entry_c.get())
+        resultado = formula_cuadratica(a, b, c)
+        messagebox.showinfo("Resultado", resultado)
+    except ValueError:
+        messagebox.showerror("Error", "Por favor ingresa valores numéricos válidos.")
+
 def mostrar_menu_funciones():
     ventana_funciones = tk.Toplevel(ventana)
     ventana_funciones.title("Funciones")
