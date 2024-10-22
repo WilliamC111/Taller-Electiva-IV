@@ -1,6 +1,6 @@
 #Taller Unidad1
 #William cely López     202012319
-#Nicolás Esteban Peña   
+#Nicolás Esteban Peña   202010609
 
 import json
 import tkinter as tk
@@ -72,39 +72,6 @@ def generar_correos(data):
 
     return correos
 
-# Función para mostrar el menú de notas
-def mostrar_menu_notas():
-    ventana_notas = tk.Toplevel(ventana)
-    ventana_notas.title("Notas y Estudiantes")
-
-    data = cargar_datos()
-    if not data:
-        return  # Si no se pueden cargar los datos, salir de la función
-
-    opciones = ['Promedio por Asignatura', 'Promedio por Estudiante', 'Generar Correos']
-
-    combo = ttk.Combobox(ventana_notas, values=opciones)
-    combo.pack()
-
-    def ejecutar_opcion_notas():
-        seleccion = combo.get()
-        if seleccion == 'Promedio por Asignatura':
-            promedios = calcular_promedio_por_asignatura(data)
-            resultado = "\n".join([f"{asignatura}: {promedio:.2f}" for asignatura, promedio in promedios.items()])
-            messagebox.showinfo("Promedio por Asignatura", resultado)
-
-        elif seleccion == 'Promedio por Estudiante':
-            promedios_estudiantes = calcular_promedio_por_estudiante(data)
-            resultado = "\n".join([f"{apellidos[0]} {apellidos[1]}: {promedio:.2f}" for apellidos, promedio in promedios_estudiantes])
-            messagebox.showinfo("Promedio por Estudiante", resultado)
-
-        elif seleccion == 'Generar Correos':
-            correos = generar_correos(data)
-            resultado = "\n".join([f"{nombre}: {correo}" for nombre, correo in correos])
-            messagebox.showinfo("Correos", resultado)
-
-    tk.Button(ventana_notas, text="Ejecutar", command=ejecutar_opcion_notas).pack()
-
 # Función para resolver la ecuación cuadrática 
 def ecuacion_cuadratica(a, b, c):
     discriminante = b**2 - 4*a*c
@@ -156,59 +123,6 @@ def resolver_ecuacion_funciones(entry_a, entry_b, entry_c):
     except ValueError:
         messagebox.showerror("Error", "Por favor ingresa valores numéricos válidos.")
 
-# Función para mostrar el menú de operadores
-def mostrar_menu_operadores():
-    ventana_operadores = tk.Toplevel(ventana)
-    ventana_operadores.title("Operadores - Ecuación Cuadrática")
-
-    tk.Label(ventana_operadores, text="Valor de a:").pack()
-    entry_a = tk.Entry(ventana_operadores)
-    entry_a.pack()
-
-    tk.Label(ventana_operadores, text="Valor de b:").pack()
-    entry_b = tk.Entry(ventana_operadores)
-    entry_b.pack()
-
-    tk.Label(ventana_operadores, text="Valor de c:").pack()
-    entry_c = tk.Entry(ventana_operadores)
-    entry_c.pack()
-
-    tk.Button(ventana_operadores, text="Resolver", command=lambda: resolver_ecuacion_operadores(entry_a, entry_b, entry_c)).pack()
-
-# Función para mostrar el menú de funciones
-def mostrar_menu_funciones():
-    ventana_funciones = tk.Toplevel(ventana)
-    ventana_funciones.title("Funciones")
-
-    tk.Label(ventana_funciones, text="Seleccione una función:").pack()
-
-    opciones = ['¿Es Vocal?', 'Resolver Ecuación Cuadrática', 'Generar Histograma']
-
-    # Lista desplegable (combobox)
-    combo = ttk.Combobox(ventana_funciones, values=opciones)
-    combo.pack()
-
-    # Función para manejar la opción seleccionada
-    def ejecutar_funcion_seleccionada():
-        seleccion = combo.get()
-
-        if seleccion == '¿Es Vocal?':
-            ventana_vocal = tk.Toplevel(ventana_funciones)
-            ventana_vocal.title("Verificar Vocal")
-            tk.Label(ventana_vocal, text="Ingresa un carácter:").pack()
-            entry_caracter = tk.Entry(ventana_vocal)
-            entry_caracter.pack()
-            tk.Button(ventana_vocal, text="Verificar", command=lambda: es_vocal(entry_caracter)).pack()
-
-        elif seleccion == 'Resolver Ecuación Cuadrática':
-            mostrar_menu_operadores()
-
-        elif seleccion == 'Generar Histograma':
-            generar_histograma()
-
-    # Botón para ejecutar la opción seleccionada
-    tk.Button(ventana_funciones, text="Ejecutar", command=ejecutar_funcion_seleccionada).pack()
-
 # Función para determinar si un carácter es vocal o no
 def es_vocal(entry_caracter):
     caracter = entry_caracter.get()
@@ -244,11 +158,13 @@ def ejemplo_find():
     frase = "Analítica de Datos"
     posicion = frase.find("Datos")
     messagebox.showinfo("Find", f"Original: {frase}\nPosición de 'Datos': {posicion}")
+    
 #Devuelve el número de ocurrencias de una subcadena dentro de una cadena.
 def ejemplo_count():
     frase = "Gestión de Datos"
     contador = frase.count("Datos")
     messagebox.showinfo("Count", f"Original: {frase}\nCantidad de 'Datos': {contador}")
+    
 #Retorna una copia de la cadena con la primera letra en mayúscula y el resto en minúscula.
 def ejemplo_capitalize():
     frase = "gestión de datos"
@@ -259,21 +175,25 @@ def ejemplo_title():
     frase = "gestión de datos"
     titulo = frase.title()
     messagebox.showinfo("Title", f"Original: {frase}\nTitle Case: {titulo}")
+    
 #Elimina los espacios en blanco al final de una cadena.
 def ejemplo_rstrip():
     frase = "Gestión de Datos   "
     resultado = frase.rstrip()
     messagebox.showinfo("Rstrip", f"Original con espacios: '{frase}'\nRstrip: '{resultado}'")
+    
 #Devuelve la posición de la primera ocurrencia de una subcadena dentro de una cadena.
 def ejemplo_index():
     frase = "Analítica de Datos"
     indice = frase.index("Datos")
     messagebox.showinfo("Index", f"Original: {frase}\nÍndice de 'Datos': {indice}")
+    
 #Retorna una versión en minúsculas de la cadena.
 def ejemplo_casefold():
     frase = "GESTIÓN DE DATOS"
     resultado = frase.casefold()
     messagebox.showinfo("Casefold", f"Original: {frase}\nCasefold (minúsculas): {resultado}")
+    
 #Función para dividir la cadena en palabras y devolver una lista de palabras.
 def ejemplo_manipulacion_cadenas():
     frase = "Gestión de Datos"
@@ -341,141 +261,6 @@ def symmetric_difference(conjunto1, conjunto2):
     sim_diff = conjunto1.symmetric_difference(conjunto2)
     return f"Resultado de symmetric_difference: {sim_diff}"
 
-# Función para manejar el menú de conjuntos
-def mostrar_menu_conjuntos():
-    ventana_conjuntos = tk.Toplevel(ventana)
-    ventana_conjuntos.title("Funciones de Conjuntos")
-
-    tk.Label(ventana_conjuntos, text="Seleccione una función de conjuntos:").pack()
-
-    # Opciones para conjuntos
-    opciones = [
-        'intersection_update()', 'isdisjoint()', 'issubset()', 'issuperset()', 'pop()',
-        'symmetric_difference_update()', 'union()', 'update()', 'remove()', 'symmetric_difference()'
-    ]
-
-    combo = ttk.Combobox(ventana_conjuntos, values=opciones)
-    combo.pack()
-
-    # Función para manejar la opción seleccionada
-    def ejecutar_funcion_conjunto():
-        seleccion = combo.get()
-
-        conjunto1 = {1, 2, 3, 4, 5}
-        conjunto2 = {4, 5, 6, 7, 8}
-
-        # Llamar a la función correcta dependiendo de la selección
-        if seleccion == 'intersection_update()':
-            resultado = intersection_update(conjunto1, conjunto2)
-
-        elif seleccion == 'isdisjoint()':
-            resultado = isdisjoint(conjunto1, conjunto2)
-
-        elif seleccion == 'issubset()':
-            resultado = issubset(conjunto1, conjunto2)
-
-        elif seleccion == 'issuperset()':
-            resultado = issuperset(conjunto1, conjunto2)
-
-        elif seleccion == 'pop()':
-            resultado = pop_element(conjunto1)
-
-        elif seleccion == 'symmetric_difference_update()':
-            resultado = symmetric_difference_update(conjunto1, conjunto2)
-
-        elif seleccion == 'union()':
-            resultado = union(conjunto1, conjunto2)
-
-        elif seleccion == 'update()':
-            resultado = update(conjunto1, conjunto2)
-
-        elif seleccion == 'remove()':
-            resultado = remove(conjunto1, 3)  # Cambiar este valor si es necesario
-
-        elif seleccion == 'symmetric_difference()':
-            resultado = symmetric_difference(conjunto1, conjunto2)
-
-        messagebox.showinfo("Resultado", resultado)
-
-    # Botón para ejecutar la función seleccionada
-    tk.Button(ventana_conjuntos, text="Ejecutar", command=ejecutar_funcion_conjunto).pack()
-
-
-# Función para mostrar el menú de listas
-def mostrar_menu_listas():
-    ventana_listas = tk.Toplevel(ventana)
-    ventana_listas.title("Funciones de Listas")
-
-    tk.Label(ventana_listas, text="Seleccione una opción:").pack()
-
-    opciones = ['Mostrar Empleados', 'Verificar Duplicados', 'Eliminar Duplicados']
-
-    combo = ttk.Combobox(ventana_listas, values=opciones)
-    combo.pack()
-
-    # Función para manejar la opción seleccionada
-    def ejecutar_opcion_lista():
-        seleccion = combo.get()
-        if seleccion == 'Mostrar Empleados':
-            nombres = ['Luis', 'Pedro', 'Lucia']
-            edades = [20, 18, 30]
-            peso = [55.6, 60, 65.8]
-            mostrar_empleados(nombres, edades, peso)
-
-        elif seleccion == 'Verificar Duplicados':
-            lista = [1, 2, 3, 2, 4]
-            resultado = tiene_duplicados(lista)
-            messagebox.showinfo("Verificar Duplicados", f"¿Hay duplicados? {'Sí' if resultado else 'No'}")
-
-        elif seleccion == 'Eliminar Duplicados':
-            lista = [1, 2, 3, 2, 4]
-            lista_sin_duplicados = eliminar_duplicados(lista)
-            messagebox.showinfo("Eliminar Duplicados", f"Lista original: {lista}\nLista sin duplicados: {lista_sin_duplicados}")
-
-    tk.Button(ventana_listas, text="Ejecutar", command=ejecutar_opcion_lista).pack()
-
-# Función para mostrar el menú de cadenas con las opciones
-def mostrar_menu_cadenas():
-    ventana_cadenas = tk.Toplevel(ventana)
-    ventana_cadenas.title("Funciones de Cadenas")
-
-    tk.Label(ventana_cadenas, text="Seleccione una función de cadenas:").pack()
-
-    opciones = [
-        'replace', 'find', 'count', 'capitalize', 'title',
-        'rstrip', 'index', 'casefold', 'Dividir y manipular cadenas', 'Obtener mes de la fecha'
-    ]
-
-    combo = ttk.Combobox(ventana_cadenas, values=opciones)
-    combo.pack()
-
-    # Función para ejecutar según la opción seleccionada
-    def ejecutar_funcion_cadenas():
-        seleccion = combo.get()
-
-        if seleccion == 'replace':
-            ejemplo_replace()
-        elif seleccion == 'find':
-            ejemplo_find()
-        elif seleccion == 'count':
-            ejemplo_count()
-        elif seleccion == 'capitalize':
-            ejemplo_capitalize()
-        elif seleccion == 'title':
-            ejemplo_title()
-        elif seleccion == 'rstrip':
-            ejemplo_rstrip()
-        elif seleccion == 'index':
-            ejemplo_index()
-        elif seleccion == 'casefold':
-            ejemplo_casefold()
-        elif seleccion == 'Dividir y manipular cadenas':
-            ejemplo_manipulacion_cadenas()
-        elif seleccion == 'Obtener mes de la fecha':
-            ejemplo_fecha()
-
-    tk.Button(ventana_cadenas, text="Ejecutar", command=ejecutar_funcion_cadenas).pack()
-
 # Función para agrupar palabras que comienzan con la misma letra
 def agrupar_por_inicial():
     words = ['apple', 'bat', 'bar', 'atom', 'book', 'cat']
@@ -521,6 +306,223 @@ def convertir_cadena_a_diccionario():
     
     resultado = str(diccionario_empleados)
     messagebox.showinfo("Diccionario de Empleados", resultado)
+    
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+
+# Función para mostrar el menú de notas
+def mostrar_menu_notas():
+    ventana_notas = tk.Toplevel(ventana)
+    ventana_notas.title("Notas y Estudiantes")
+
+    data = cargar_datos()
+    if not data:
+        return  # Si no se pueden cargar los datos, salir de la función
+
+    opciones = ['Promedio por Asignatura', 'Promedio por Estudiante', 'Generar Correos']
+
+    combo = ttk.Combobox(ventana_notas, values=opciones)
+    combo.pack()
+
+    def ejecutar_opcion_notas():
+        seleccion = combo.get()
+        if seleccion == 'Promedio por Asignatura':
+            resultado = calcular_promedio_por_asignatura(data)
+            messagebox.showinfo("Promedio por Asignatura", str(resultado))
+        elif seleccion == 'Promedio por Estudiante':
+            resultado = calcular_promedio_por_estudiante(data)
+            messagebox.showinfo("Promedio por Estudiante", str(resultado))
+        elif seleccion == 'Generar Correos':
+            resultado = generar_correos(data)
+            messagebox.showinfo("Generar Correos", str(resultado))
+
+    tk.Button(ventana_notas, text="Ejecutar", command=ejecutar_opcion_notas).pack()
+
+# Función para mostrar el menú de operadores
+def mostrar_menu_operadores():
+    ventana_operadores = tk.Toplevel(ventana)
+    ventana_operadores.title("Operadores - Ecuación Cuadrática")
+
+    tk.Label(ventana_operadores, text="Valor de a:").pack()
+    entry_a = tk.Entry(ventana_operadores)
+    entry_a.pack()
+
+    tk.Label(ventana_operadores, text="Valor de b:").pack()
+    entry_b = tk.Entry(ventana_operadores)
+    entry_b.pack()
+
+    tk.Label(ventana_operadores, text="Valor de c:").pack()
+    entry_c = tk.Entry(ventana_operadores)
+    entry_c.pack()
+
+    tk.Button(ventana_operadores, text="Resolver", command=lambda: resolver_ecuacion_operadores(entry_a, entry_b, entry_c)).pack()
+
+# Función para mostrar el menú de funciones
+def mostrar_menu_funciones():
+    ventana_funciones = tk.Toplevel(ventana)
+    ventana_funciones.title("Funciones")
+
+    tk.Label(ventana_funciones, text="Seleccione una función:").pack()
+
+    opciones = ['¿Es Vocal?', 'Resolver Ecuación Cuadrática', 'Generar Histograma']
+
+    # Lista desplegable (combobox)
+    combo = ttk.Combobox(ventana_funciones, values=opciones)
+    combo.pack()
+
+    # Función para manejar la opción seleccionada
+    def ejecutar_funcion_seleccionada():
+        seleccion = combo.get()
+
+        if seleccion == '¿Es Vocal?':
+            ventana_vocal = tk.Toplevel(ventana_funciones)
+            ventana_vocal.title("¿Es Vocal?")
+            tk.Label(ventana_vocal, text="Ingrese un carácter:").pack()
+            entry_caracter = tk.Entry(ventana_vocal)
+            entry_caracter.pack()
+            tk.Button(ventana_vocal, text="Verificar", command=lambda: es_vocal(entry_caracter)).pack()
+        elif seleccion == 'Resolver Ecuación Cuadrática':
+            ventana_ecuacion = tk.Toplevel(ventana_funciones)
+            ventana_ecuacion.title("Resolver Ecuación Cuadrática")
+            tk.Label(ventana_ecuacion, text="Valor de a:").pack()
+            entry_a = tk.Entry(ventana_ecuacion)
+            entry_a.pack()
+            tk.Label(ventana_ecuacion, text="Valor de b:").pack()
+            entry_b = tk.Entry(ventana_ecuacion)
+            entry_b.pack()
+            tk.Label(ventana_ecuacion, text="Valor de c:").pack()
+            entry_c = tk.Entry(ventana_ecuacion)
+            entry_c.pack()
+            tk.Button(ventana_ecuacion, text="Resolver", command=lambda: resolver_ecuacion_funciones(entry_a, entry_b, entry_c)).pack()
+        elif seleccion == 'Generar Histograma':
+            generar_histograma()
+
+    # Botón para ejecutar la opción seleccionada
+    tk.Button(ventana_funciones, text="Ejecutar", command=ejecutar_funcion_seleccionada).pack()
+
+# Función para mostrar el menú de cadenas con las opciones
+def mostrar_menu_cadenas():
+    ventana_cadenas = tk.Toplevel(ventana)
+    ventana_cadenas.title("Funciones de Cadenas")
+
+    tk.Label(ventana_cadenas, text="Seleccione una función de cadenas:").pack()
+
+    opciones = [
+        'replace', 'find', 'count', 'capitalize', 'title',
+        'rstrip', 'index', 'casefold', 'Dividir y manipular cadenas', 'Obtener mes de la fecha'
+    ]
+
+    combo = ttk.Combobox(ventana_cadenas, values=opciones)
+    combo.pack()
+
+    # Función para ejecutar según la opción seleccionada
+    def ejecutar_funcion_cadenas():
+        seleccion = combo.get()
+
+        if seleccion == 'replace':
+            ejemplo_replace()
+        elif seleccion == 'find':
+            ejemplo_find()
+        elif seleccion == 'count':
+            ejemplo_count()
+        elif seleccion == 'capitalize':
+            ejemplo_capitalize()
+        elif seleccion == 'title':
+            ejemplo_title()
+        elif seleccion == 'rstrip':
+            ejemplo_rstrip()
+        elif seleccion == 'index':
+            ejemplo_index()
+        elif seleccion == 'casefold':
+            ejemplo_casefold()
+        elif seleccion == 'Dividir y manipular cadenas':
+            ejemplo_manipulacion_cadenas()
+        elif seleccion == 'Obtener mes de la fecha':
+            ejemplo_fecha()
+
+    tk.Button(ventana_cadenas, text="Ejecutar", command=ejecutar_funcion_cadenas).pack()
+
+# Función para mostrar el menú de listas
+def mostrar_menu_listas():
+    ventana_listas = tk.Toplevel(ventana)
+    ventana_listas.title("Funciones de Listas")
+
+    tk.Label(ventana_listas, text="Seleccione una opción:").pack()
+
+    opciones = ['Mostrar Empleados', 'Verificar Duplicados', 'Eliminar Duplicados']
+
+    combo = ttk.Combobox(ventana_listas, values=opciones)
+    combo.pack()
+
+    # Función para manejar la opción seleccionada
+    def ejecutar_opcion_lista():
+        seleccion = combo.get()
+        if seleccion == 'Mostrar Empleados':
+            nombres = ["Juan", "Ana", "Luis"]
+            edades = [25, 30, 35]
+            peso = [70, 60, 80]
+            mostrar_empleados(nombres, edades, peso)
+        elif seleccion == 'Verificar Duplicados':
+            lista = [1, 2, 3, 4, 5, 1, 2]
+            resultado = tiene_duplicados(lista)
+            messagebox.showinfo("Verificar Duplicados", f"¿Tiene duplicados?: {resultado}")
+        elif seleccion == 'Eliminar Duplicados':
+            lista = [1, 2, 3, 4, 5, 1, 2]
+            resultado = eliminar_duplicados(lista)
+            messagebox.showinfo("Eliminar Duplicados", f"Lista sin duplicados: {resultado}")
+
+    tk.Button(ventana_listas, text="Ejecutar", command=ejecutar_opcion_lista).pack()
+
+# Función para mostrar el menú de conjuntos
+def mostrar_menu_conjuntos():
+    ventana_conjuntos = tk.Toplevel(ventana)
+    ventana_conjuntos.title("Funciones de Conjuntos")
+
+    tk.Label(ventana_conjuntos, text="Seleccione una función de conjuntos:").pack()
+
+    # Opciones para conjuntos
+    opciones = [
+        'intersection_update()', 'isdisjoint()', 'issubset()', 'issuperset()', 'pop()',
+        'symmetric_difference_update()', 'union()', 'update()', 'remove()', 'symmetric_difference()'
+    ]
+
+    combo = ttk.Combobox(ventana_conjuntos, values=opciones)
+    combo.pack()
+
+    # Función para manejar la opción seleccionada
+    def ejecutar_funcion_conjunto():
+        seleccion = combo.get()
+
+        conjunto1 = {1, 2, 3, 4, 5}
+        conjunto2 = {4, 5, 6, 7, 8}
+
+        # Llamar a la función correcta dependiendo de la selección
+        if seleccion == 'intersection_update()':
+            resultado = intersection_update(conjunto1, conjunto2)
+        elif seleccion == 'isdisjoint()':
+            resultado = isdisjoint(conjunto1, conjunto2)
+        elif seleccion == 'issubset()':
+            resultado = issubset(conjunto1, conjunto2)
+        elif seleccion == 'issuperset()':
+            resultado = issuperset(conjunto1, conjunto2)
+        elif seleccion == 'pop()':
+            resultado = pop_element(conjunto1)
+        elif seleccion == 'symmetric_difference_update()':
+            resultado = symmetric_difference_update(conjunto1, conjunto2)
+        elif seleccion == 'union()':
+            resultado = union(conjunto1, conjunto2)
+        elif seleccion == 'update()':
+            resultado = update(conjunto1, conjunto2)
+        elif seleccion == 'remove()':
+            resultado = remove(conjunto1, 4)
+        elif seleccion == 'symmetric_difference()':
+            resultado = symmetric_difference(conjunto1, conjunto2)
+
+        messagebox.showinfo("Resultado", resultado)
+
+    # Botón para ejecutar la función seleccionada
+    tk.Button(ventana_conjuntos, text="Ejecutar", command=ejecutar_funcion_conjunto).pack()
 
 # Función para mostrar el menú de diccionarios
 def mostrar_menu_diccionarios():
@@ -567,10 +569,7 @@ def mostrar_menu_diccionarios():
         if seleccion == 'Agrupar palabras por inicial':
             agrupar_por_inicial()
         elif seleccion == 'Contar vocales y consonantes':
-            if not cadena:
-                messagebox.showerror("Error", "Por favor ingrese una cadena.")
-            else:
-                contar_vocales_consonantes_diccionario(cadena)
+            contar_vocales_consonantes_diccionario(cadena)
         elif seleccion == 'Convertir cadena de clientes a diccionario':
             convertir_cadena_a_diccionario()
 
@@ -581,7 +580,6 @@ def mostrar_menu_diccionarios():
 # Ventana principal
 ventana = tk.Tk()
 ventana.title("Menú Principal")
-
 
 style = ttk.Style()
 style.configure("Neon.TButton",
