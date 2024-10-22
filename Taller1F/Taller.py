@@ -18,7 +18,7 @@ def cargar_datos():
         messagebox.showerror("Error", "El archivo JSON no se encontró.")
         return []
 
-# Función para calcular la nota promedio por asignatura
+# Función para calcular la nota promedio por asignaturas
 def calcular_promedio_por_asignatura(data):
     promedio_asignaturas = {}
     conteo_asignaturas = {}
